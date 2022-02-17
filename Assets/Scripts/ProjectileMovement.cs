@@ -35,7 +35,7 @@ public class ProjectileMovement : MonoBehaviour
   {
     if (other.gameObject.CompareTag("Structure"))
     {
-      Destroy(this.gameObject);
+      Destroy(gameObject);
     }
   }
 }
