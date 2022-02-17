@@ -31,6 +31,5 @@ public class PlayerMovement : MonoBehaviour
   void FixedUpdate()
   {
     _rb2d.velocity = speed * _direction;
-    //_rb2d.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * _direction));
   }
 }

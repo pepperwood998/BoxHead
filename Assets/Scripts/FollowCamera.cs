@@ -30,7 +30,7 @@ public class FollowCamera : MonoBehaviour
       return;
     }
 
-    _followingBounds = UpdateBounds();
+    _followingBounds = GetNewBounds();
 
     Vector3 centerPoint = GetCenterPoint();
     transform.position = new Vector3(centerPoint.x, centerPoint.y, transform.position.z);
@@ -39,7 +39,7 @@ public class FollowCamera : MonoBehaviour
     _camera.orthographicSize = newZoom;
   }
 
-  private Bounds UpdateBounds()
+  private Bounds GetNewBounds()
   {
     Bounds followingBounds = new Bounds(_followings[0].transform.position, Vector3.zero);
     for (int i = 0; i < _followings.Length; i++)
