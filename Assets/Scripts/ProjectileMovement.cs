@@ -18,6 +18,7 @@ public class ProjectileMovement : MonoBehaviour
       _moveAngle = value;
       _xSpeed = Mathf.Sin(value) * speed;
       _ySpeed = Mathf.Cos(value) * speed;
+      transform.rotation = Quaternion.Euler(0, 0, -_moveAngle * Mathf.Rad2Deg);
     }
   }
 
@@ -33,9 +34,10 @@ public class ProjectileMovement : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D other)
   {
+    Destroy(gameObject);
     if (other.gameObject.CompareTag("Structure"))
     {
-      Destroy(gameObject);
+      // Do something
     }
   }
 }

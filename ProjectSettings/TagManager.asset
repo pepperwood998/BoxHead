@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Structure
+  - Undefined
+  - WeaponTip
   layers:
   - Default
   - TransparentFX
