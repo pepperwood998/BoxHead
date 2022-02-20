@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileWeapon : MonoBehaviour, IWeapon
+public class ProjectileWeapon : Weapon
 {
   [SerializeField] GameObject bulletPrefab;
 
@@ -13,10 +13,9 @@ public class ProjectileWeapon : MonoBehaviour, IWeapon
     _weaponTip = FindGameObjectInChildrenWithTag(gameObject, "WeaponTip");
   }
 
-  public void Attack()
+  public override void Shoot(Vector3 targetPosition)
   {
-    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    Vector3 bulletDirection = (mouseWorldPosition - _weaponTip.transform.position).normalized;
+    Vector3 bulletDirection = (targetPosition - _weaponTip.transform.position).normalized;
     float bulletAngle = Mathf.Atan2(bulletDirection.x, bulletDirection.y);
 
     GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));

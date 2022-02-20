@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementBase : MonoBehaviour
 {
   [SerializeField] float speed = 15.0f;
   [SerializeField] GameObject boundary;
 
-  private Rigidbody2D _rb2d;
-  private Vector2 _direction;
-  private float _minX;
-  private float _maxX;
-  private float _minY;
-  private float _maxY;
+  protected Rigidbody2D _rb2d;
+  protected Vector2 _direction;
+  protected float _minX;
+  protected float _maxX;
+  protected float _minY;
+  protected float _maxY;
 
   void Start()
   {
@@ -20,26 +20,11 @@ public class PlayerMovement : MonoBehaviour
     UpdateBoundaryCoords(boundary);
   }
 
-  void Update()
-  {
-    ////Using Euler angle
-    //Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //Vector3 mouseDelta = mouseWorldPosition - transform.position;
-    //float angle = Mathf.Atan2(mouseDelta.x, mouseDelta.y) * Mathf.Rad2Deg;
-    //transform.rotation = Quaternion.Euler(0, 0, -angle);
-
-    Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    Vector2 mouseDirection = (mouseWorldPosition - (Vector2)transform.position).normalized;
-    transform.up = mouseDirection;
-    _direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-  }
-
-  void FixedUpdate()
+  protected void Move()
   {
     _rb2d.velocity = speed * _direction;
     transform.position = new Vector2(Mathf.Clamp(transform.position.x, _minX, _maxX), Mathf.Clamp(transform.position.y, _minY, _maxY));
   }
-
   private void UpdateBoundaryCoords(GameObject boundary)
   {
     Bounds playerSize = transform.Find("Body").GetComponent<SpriteRenderer>().bounds;

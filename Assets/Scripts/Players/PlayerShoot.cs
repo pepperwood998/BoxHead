@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-  private IWeapon _weapon;
+  private Weapon _weapon;
 
   void Start()
   {
-    _weapon = GetComponentInChildren<IWeapon>();
+    _weapon = GetComponentInChildren<Weapon>();
   }
 
   void Update()
   {
     if (_weapon != null && Input.GetMouseButtonDown(0))
     {
-      _weapon.Attack();
+      Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      _weapon.Shoot(mouseWorldPosition);
     }
   }
 }
